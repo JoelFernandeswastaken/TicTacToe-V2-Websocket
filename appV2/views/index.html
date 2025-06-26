@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="../public/styles.css">
+        <script defer src="../public/scripts.js"></script>
+    </head>
+    <body>
+        <!-- Landing Page -->
+        <div class="landing-screen" id="landing-screen">
+            <h1>Tic-Tac-Toe</h1>
+            <button id="start-button" class="btn">Start Game</button>
+            <div id="loading-indicator" class="hidden">Waiting for another player...</div>
+        </div>
+
+        <!-- Game Area -->
+        <div class="game-area hidden" id="game-area">
+            <div class="game-pane">
+            <div class="grid">
+                    <!-- Your grid cells -->
+                <div class="cell remove-border-top remove-border-left" data-index="1" id="c1"></div>
+                <div class="cell remove-border-top" data-index="2" id="c2"></div>
+                <div class="cell remove-border-top remove-border-right" data-index="3" id="c3"></div>
+                <div class="cell remove-border-left" data-index="4" id="c4"></div>
+                <div class="cell" data-index="5" id="c5"></div>
+                <div class="cell remove-border-right" data-index="6" id="c6"></div>
+                <div class="cell remove-border-bottom remove-border-left" data-index="7" id="c7"></div>
+                <div class="cell remove-border-bottom" data-index="8" id="c8"></div>
+                <div class="cell remove-border-bottom remove-border-right" data-index="9" id="c9"></div>
+            </div>
+            </div>
+            <div class="player" id="player-details"></div>
+            <div class="hidden" id="result">
+            <p id="winner"></p>
+            <button class="btn" id="play-again" onclick="GameOver()">Play Again</button>
+            </div>
+        </div>  
+    </body>
+</html>
