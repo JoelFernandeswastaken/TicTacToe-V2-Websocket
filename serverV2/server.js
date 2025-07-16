@@ -2,10 +2,26 @@ import { WebSocketServer } from 'ws';
 import dotenv from 'dotenv';
 import { GenerateID } from './utils.js';
 import { joinGame, getGameByID } from './gameManager.js';
+import express from 'express';
+import http from 'http';
+import { fileURLToPath } from 'url';
+import path,{ dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 dotenv.config();
 
-const wss = new WebSocketServer({ port: 8080 });
+const app = express();
+const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
+// const wss = new WebSocketServer({ port: process.env.PORT || 8080 });
+
+app.use(express.static(path.join(__dirname, "../appV2/public")));
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../appV2/views/index.html"));
+});
 
 wss.uniqueClientID = function () {
   return "client_" + GenerateID();
@@ -72,4 +88,9 @@ wss.on("connection", (ws) => {
   });
 
   ws.on("error", console.error);
+});
+
+const PORT = process.env.PORT || 8080;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });

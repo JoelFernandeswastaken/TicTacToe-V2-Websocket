@@ -2,13 +2,17 @@ let socket;
 let clientID = "";
 let clientDetails = {};
 let clientMove = 0;
+let protocol = window.location.protocol === "https:" ? "wss" : "ws";
+let hostname = window.location.hostname;
+let port = hostname === "localhost" ? 8080 : "";
 
 document.getElementById("start-button").addEventListener("click", () => {
     document.getElementById("start-button").disabled = true;
     const loadingIndicator = document.getElementById("loading-indicator");
     loadingIndicator.classList.remove("hidden");
-
-    socket = new WebSocket('ws://localhost:8080');
+    console.log(`Connecting to WebSocket server... Address: ${hostname}:${port}`);
+    socket = new WebSocket(`${protocol}://${hostname}:${port}`);
+    // socket = new WebSocket('ws://localhost:8080');
 
     socket.addEventListener("open", () => {
         console.log("Connected to WebSocket server");
